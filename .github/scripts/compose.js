@@ -17,14 +17,16 @@ const html = `<!DOCTYPE html>
 <meta charset="UTF-8"/>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body { background: #ffffff; display: flex; align-items: flex-start; justify-content: center; min-height: 100vh; padding: 40px 80px; }
+body { background: #ffffff; display: inline-block; }
+.wrap { background: #ffffff; padding: 40px 80px; display: inline-block; }
 .row { display: flex; align-items: flex-start; gap: 48px; }
 .panel { width: 360px; height: 560px; overflow: hidden; border-radius: 52px 52px 0 0; flex-shrink: 0; }
 .panel img { display: block; width: 360px; height: auto; }
-.arrow-wrap { display: flex; align-items: center; justify-content: center; width: 60px; margin-top: 280px; }
+.arrow-wrap { display: flex; align-items: center; justify-content: center; width: 60px; margin-top: 280px; flex-shrink: 0; }
 </style>
 </head>
 <body>
+<div class="wrap">
 <div class="row">
   <div class="panel">
     <img src="data:image/png;base64,${smsB64}" alt="sms"/>
@@ -39,17 +41,18 @@ body { background: #ffffff; display: flex; align-items: flex-start; justify-cont
     <img src="data:image/png;base64,${pushB64}" alt="push"/>
   </div>
 </div>
+</div>
 </body></html>`;
 
 const browser = await chromium.launch();
 const ctx = await browser.newContext({
-  viewport: { width: 1300, height: 800 },
+  viewport: { width: 1400, height: 800 },
   deviceScaleFactor: 2
 });
 const page = await ctx.newPage();
 await page.setContent(html, { waitUntil: "networkidle" });
 await page.waitForTimeout(500);
-const plenary = await page.$(".row");
+const plenary = await page.$(".wrap");
 const outName = `${c.outName}.png`;
 const outPath = join(OUT_DIR, outName);
 await plenary.screenshot({ path: outPath, omitBackground: false });
