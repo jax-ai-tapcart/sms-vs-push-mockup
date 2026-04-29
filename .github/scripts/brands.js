@@ -8,6 +8,8 @@ export const BRANDS = {
     sms2Line1: "Lola Blankets: Kori, your coziest weekend starts now. \uD83D\uDECB Take 20% off sitewide \u2014 only 48 hours!",
     sms2Link: "https://lolablankets.com/CyuPTzr47ul",
     sms2Line3: "Reply STOP to end.",
-    pushTitle: "Kori, your wishlist is 20% off \uD83D\uDCD1"
+    pushTitle: "Kori, your wishlist is 20% off \uD83D\uDCCD",
+    pushBody: "Snag your favorite blanket before it sells out.",
+    outName: "SMS vs Push for Lola Blankets"
   }
 };
