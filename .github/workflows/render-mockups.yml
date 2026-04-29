@@ -31,9 +31,11 @@ jobs:
           sed -i 's|.*background: radial-gradient.*e*|  background: radial-gradient(ellipse at 50% 0%, #ff9e67 0%, #e14594 40%, #7b61ff 80%, transparent 100%);|' .github/scripts/render-push.js
           sed -i 's/height: 160px; object-fit: cover;/height: 220px; object-fit: cover;/' .github/scripts/render-push.js
           sed -i 's/margin: 40px;//' .github/scripts/render-push.js
+          sed -i 's|phone-wrap { position: relative; width: 380px; }|phone-wrap { position: relative; width: 380px; padding: 50px; box-sizing: content-box; }|' .github/scripts/render-push.js
           sed -i 's/Inter, sans-serif/\"SF Pro\", Inter, sans-serif/' .github/scripts/render-push.js
           sed -i 's/Inter, sans-serif/\"SF Pro\", Inter, sans-serif/' .github/scripts/render-sms.js
-          sed -i 's/.content { flex: 1;/.content { flex: 0; margin-bottom: auto;/' .github/scripts/render-sms.js
+          sed -i 's/flex: 1; overflow: hidden; padding: 8px 8px/flex-grow: 1; overflow: hidden; padding: 8px 8px/' .github/scripts/render-sms.js
+          sed -i 's/display: flex; flex-direction: column; }.footer/display: flex; flex-direction: column; min-height: 0; } .footer/' .github/scripts/render-sms.js
       - name: Render SMS panel
         run: cd .github/scripts && node render-sms.js ${{ inputs.brand }}
       - name: Render Push panel
@@ -51,7 +53,7 @@ jobs:
       - name: Create release
         run: |
           file=$(ls mockup-output/*.png | head -1)
-          tag="${{ inputs.brand }}-v4-${{ github.run_number }}"
+          tag="${{ inputs.brand }}-v5-${{ github.run_number }}"
           gh release create "$tag" "$file" --title "SMS vs Push - ${{ inputs.brand }}" --notes "Rendered by CI"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
