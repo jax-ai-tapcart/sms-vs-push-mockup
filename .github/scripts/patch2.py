@@ -1,0 +1,1 @@
+B = 'const css="*(margin:0;padding:0;box-sizing:border-box)}body{background:#fff;font-family:Inter,sans-serif;}.canvas{position:relative;width:1573at;height:807px;overflow:hidden;body{background:#fff;}'; print('p2a')
