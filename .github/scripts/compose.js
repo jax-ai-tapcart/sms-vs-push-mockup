@@ -18,26 +18,28 @@ const html = `<!DOCTYPE html>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body { background: #ffffff; display: inline-block; }
-.wrap { background: #ffffff; padding: 40px 80px; display: inline-block; }
-.row { display: flex; align-items: flex-start; gap: 48px; }
-.panel { width: 360px; height: 640px; overflow: hidden; border-radius: 52px 52px 0 0; flex-shrink: 0; }
-.panel img { display: block; width: 360px; height: auto; }
-.arrow-wrap { display: flex; align-items: center; justify-content: center; width: 60px; margin-top: 320px; flex-shrink: 0; }
+.wrap { background: #ffffff; padding: 60px 100px; display: inline-block; }
+.row { display: flex; align-items: flex-start; gap: 60px; }
+.sms-panel { width: 380px; height: 680px; overflow: hidden; border-radius: 52px 52px 0 0; flex-shrink: 0; }
+.sms-panel img { display: block; width: 380px; height: auto; }
+.push-panel { width: 460px; height: 680px; overflow: hidden; flex-shrink: 0; display: flex; align-items: flex-start; justify-content: center; }
+.push-panel img { display: block; width: 460px; height: auto; }
+.arrow-wrap { display: flex; align-items: center; justify-content: center; width: 64px; margin-top: 340px; flex-shrink: 0; }
 </style>
 </head>
 <body>
 <div class="wrap">
 <div class="row">
-  <div class="panel">
+  <div class="sms-panel">
     <img src="data:image/png;base64,${smsB64}" alt="sms"/>
   </div>
   <div class="arrow-wrap">
-    <svg width="56" height="24" viewBox="0 0 56 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <line x1="0" y1="12" x2="44" y2="12" stroke="#111111" stroke-width="2.5" stroke-linecap="round"/>
-      <polygon points="44,4 56,12 44,20" fill="#111111"/>
+    <svg width="60" height="28" viewBox="0 0 60 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <line x1="0" y1="14" x2="46" y2="14" stroke="#111111" stroke-width="3.5" stroke-linecap="round"/>
+      <polygon points="46,4 60,14 46,24" fill="#111111"/>
     </svg>
   </div>
-  <div class="panel">
+  <div class="push-panel">
     <img src="data:image/png;base64,${pushB64}" alt="push"/>
   </div>
 </div>
@@ -46,7 +48,7 @@ body { background: #ffffff; display: inline-block; }
 
 const browser = await chromium.launch();
 const ctx = await browser.newContext({
-  viewport: { width: 1400, height: 900 },
+  viewport: { width: 1800, height: 1100 },
   deviceScaleFactor: 2
 });
 const page = await ctx.newPage();
