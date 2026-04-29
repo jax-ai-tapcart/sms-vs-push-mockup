@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       brand:
-        description: Brand slug (e.g. lola)
+        description: Brand slug
         required: true
         default: lola
 
@@ -26,14 +26,13 @@ jobs:
           npm init -y --silent
           npm i playwright --silent
           npx playwright install --with-deps chromium
-      - name: Patch scripts
-        run: python3 .github/scripts/patch.py
-      - name: Render SMS panel
-        run: cd .github/scripts && node render-sms.js ${{ inputs.brand }}
-      - name: Render Push panel
-        run: cd .github/scripts && node render-push.js ${{ inputs.brand }}
-      - name: Compose final PNG
-        run: cd .github/scripts && node compose.js ${{ inputs.brand }}
+      - name: Generate render script
+        run: |
+          python3 .github/scripts/patch.py
+          python3 .github/scripts/patch2.py
+          python3 .github/scripts/patch3.py
+      - name: Render
+        run: cd .github/scripts && node render-final.js ${{ inputs.brand }}
       - name: Copy output
         run: mv .github/scripts/mockup-output ./mockup-output
       - name: Upload artifact
@@ -45,7 +44,7 @@ jobs:
       - name: Create release
         run: |
           file=$(ls mockup-output/*.png | head -1)
-          tag="${{ inputs.brand }}-v9-${{ github.run_number }}"
-          gh release create "$tag" "$file" --title "SMS vs Push - ${{ inputs.brand }}" --notes "Rendered by CI"
+          tag="${{ inputs.brand }}-v10-${{ github.run_number }}"
+          gh release create "$tag" "$file" --title "SMS vs Push" --notes "CI render"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
