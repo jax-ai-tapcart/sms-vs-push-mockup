@@ -35,7 +35,7 @@ jobs:
           sed -i 's/Inter, sans-serif/\"SF Pro\", Inter, sans-serif/' .github/scripts/render-push.js
           sed -i 's/Inter, sans-serif/\"SF Pro\", Inter, sans-serif/' .github/scripts/render-sms.js
           sed -i 's/flex: 1; overflow: hidden; padding: 8px 8px/flex-grow: 1; overflow: hidden; padding: 8px 8px/' .github/scripts/render-sms.js
-          sed -i 's/display: flex; flex-direction: column; }.footer/display: flex; flex-direction: column; min-height: 0; } .footer/' .github/scripts/render-sms.js
+          sed -i 's/padding: 8px 12px; display: flex; flex-direction: column; align-items: center; gap: 7px; }/padding: 8px 12px; display: flex; flex-direction: column; align-items: center; gap: 7px; position: absolute; bottom: 0; left: 0; right: 0; }/' .github/scripts/render-sms.js
       - name: Render SMS panel
         run: cd .github/scripts && node render-sms.js ${{ inputs.brand }}
       - name: Render Push panel
@@ -53,7 +53,7 @@ jobs:
       - name: Create release
         run: |
           file=$(ls mockup-output/*.png | head -1)
-          tag="${{ inputs.brand }}-v5-${{ github.run_number }}"
+          tag="${{ inputs.brand }}-v6-${{ github.run_number }}"
           gh release create "$tag" "$file" --title "SMS vs Push - ${{ inputs.brand }}" --notes "Rendered by CI"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
