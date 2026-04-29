@@ -23,6 +23,11 @@ jobs:
           npm init -y --silent
           npm i playwright --silent
           npx playwright install --with-deps chromium
+      - name: Patch scripts
+        run: |
+          sed -i 's/alotofastras 60%,//' .github/scripts/render-push.js
+          sed -i 's/height: 160px; object-fit: cover;/height: 192px; object-fit: cover;/' .github/scripts/render-push.js
+          sed -i 's/margin: 40px;//' .github/scripts/render-push.js
       - name: Render SMS panel
         run: cd .github/scripts && node render-sms.js ${{ inputs.brand }}
       - name: Render Push panel
@@ -31,9 +36,11 @@ jobs:
         run: cd .github/scripts && node compose.js ${{ inputs.brand }}
       - name: Copy output
         run: mv .github/scripts/mockup-output ./mockup-output
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
+      - name: Create release
+        uses: ncipollo/release-action@v1
         with:
-          name: sms-vs-push-${{ inputs.brand }}
-          path: mockup-output/*
-          retention-days: 7
+          tag: ${{ inputs.brand }}-v2-${{ github.run_number }}
+          name: SMS vs Push for ${{ inputs.brand }}
+          artifacts: mockup-output/*
+          allowUpdates: true
+          token: ${{ secrets.GITHUB_TOKEN }}
