@@ -17,11 +17,11 @@ const html = `<!DOCTYPE html>
 <meta charset="UTF-8"/>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body { background: #ffffff; display: flex; align-items: flex-start; justify-content: center; min-height: 100vh; padding: 40px; }
-.row { display: flex; align-items: flex-start; gap: 40px; }
-.panel { width: 360px; height: 480px; overflow: hidden; border-radius: 52px 52px 0 0; flex-shrink: 0; }
+body { background: #ffffff; display: flex; align-items: flex-start; justify-content: center; min-height: 100vh; padding: 40px 80px; }
+.row { display: flex; align-items: flex-start; gap: 48px; }
+.panel { width: 360px; height: 560px; overflow: hidden; border-radius: 52px 52px 0 0; flex-shrink: 0; }
 .panel img { display: block; width: 360px; height: auto; }
-.arrow-wrap { display: flex; align-items: center; justify-content: center; width: 60px; margin-top: 240px; }
+.arrow-wrap { display: flex; align-items: center; justify-content: center; width: 60px; margin-top: 280px; }
 </style>
 </head>
 <body>
@@ -30,9 +30,9 @@ body { background: #ffffff; display: flex; align-items: flex-start; justify-cont
     <img src="data:image/png;base64,${smsB64}" alt="sms"/>
   </div>
   <div class="arrow-wrap">
-    <svg width="48" height="16" viewBox="0 0 48 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <line x1="0" y1="8" x2="36" y2="8" stroke="#111111" stroke-width="1.5" stroke-linecap="round"/>
-      <polygon points="36,2 48,8 36,14" fill="#111111"/>
+    <svg width="56" height="24" viewBox="0 0 56 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <line x1="0" y1="12" x2="44" y2="12" stroke="#111111" stroke-width="2.5" stroke-linecap="round"/>
+      <polygon points="44,4 56,12 44,20" fill="#111111"/>
     </svg>
   </div>
   <div class="panel">
@@ -43,7 +43,7 @@ body { background: #ffffff; display: flex; align-items: flex-start; justify-cont
 
 const browser = await chromium.launch();
 const ctx = await browser.newContext({
-  viewport: { width: 1100, height: 700 },
+  viewport: { width: 1300, height: 800 },
   deviceScaleFactor: 2
 });
 const page = await ctx.newPage();
