@@ -20,11 +20,11 @@ const html = `<!DOCTYPE html>
 body { background: #ffffff; display: inline-block; }
 .wrap { background: #ffffff; padding: 60px 100px; display: inline-block; }
 .row { display: flex; align-items: flex-start; gap: 60px; }
-.sms-panel { width: 380px; height: 700px; overflow: hidden; border-radius: 52px 52px 0 0; flex-shrink: 0; }
+.sms-panel { width: 380px; height: 600px; overflow: hidden; border-radius: 52px 52px 0 0; flex-shrink: 0; }
 .sms-panel img { display: block; width: 380px; height: auto; }
-.push-panel { width: 580px; height: 800px; overflow: hidden; flex-shrink: 0; display: flex; align-items: flex-start; justify-content: center; }
+.push-panel { width: 580px; height: 700px; overflow: hidden; flex-shrink: 0; display: flex; align-items: flex-start; justify-content: center; }
 .push-panel img { display: block; width: 580px; height: auto; }
-.arrow-wrap { display: flex; align-items: center; justify-content: center; width: 64px; margin-top: 350px; flex-shrink: 0; }
+.arrow-wrap { display: flex; align-items: center; justify-content: center; width: 64px; margin-top: 300px; flex-shrink: 0; }
 </style>
 </head>
 <body>
