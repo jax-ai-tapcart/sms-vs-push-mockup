@@ -20,9 +20,9 @@ const html = `<!DOCTYPE html>
 body { background: #ffffff; display: inline-block; }
 .wrap { background: #ffffff; padding: 40px 80px; display: inline-block; }
 .row { display: flex; align-items: flex-start; gap: 48px; }
-.panel { width: 360px; height: 560px; overflow: hidden; border-radius: 52px 52px 0 0; flex-shrink: 0; }
+.panel { width: 360px; height: 640px; overflow: hidden; border-radius: 52px 52px 0 0; flex-shrink: 0; }
 .panel img { display: block; width: 360px; height: auto; }
-.arrow-wrap { display: flex; align-items: center; justify-content: center; width: 60px; margin-top: 280px; flex-shrink: 0; }
+.arrow-wrap { display: flex; align-items: center; justify-content: center; width: 60px; margin-top: 320px; flex-shrink: 0; }
 </style>
 </head>
 <body>
@@ -46,7 +46,7 @@ body { background: #ffffff; display: inline-block; }
 
 const browser = await chromium.launch();
 const ctx = await browser.newContext({
-  viewport: { width: 1400, height: 800 },
+  viewport: { width: 1400, height: 900 },
   deviceScaleFactor: 2
 });
 const page = await ctx.newPage();
