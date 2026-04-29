@@ -28,9 +28,11 @@ jobs:
           npx playwright install --with-deps chromium
       - name: Patch scripts
         run: |
-          sed -i 's/alotofastras 60%,//' .github/scripts/render-push.js
-          sed -i 's/height: 160px; object-fit: cover;/height: 192px; object-fit: cover;/' .github/scripts/render-push.js
+          sed -i 's|.*background: radial-gradient.*e*|  background: radial-gradient(ellipse at 50% 0%, #ff9e67 0%, #e14594 40%, #7b61ff 80%, transparent 100%);|' .github/scripts/render-push.js
+          sed -i 's/height: 160px; object-fit: cover;/height: 220px; object-fit: cover;/' .github/scripts/render-push.js
           sed -i 's/margin: 40px;//' .github/scripts/render-push.js
+          sed -i 's/Inter, sans-serif/\"SF Pro\", Inter, sans-serif/' .github/scripts/render-push.js
+          sed -i 's/Inter, sans-serif/\"SF Pro\", Inter, sans-serif/' .github/scripts/render-sms.js
       - name: Render SMS panel
         run: cd .github/scripts && node render-sms.js ${{ inputs.brand }}
       - name: Render Push panel
@@ -48,8 +50,7 @@ jobs:
       - name: Create release
         run: |
           file=$(ls mockup-output/*.png | head -1)
-          basename="$(basename "$file")"
-          tag="${{ inputs.brand }}-v2-${{ github.run_number }}"
+          tag="${{ inputs.brand }}-v3-${{ github.run_number }}"
           gh release create "$tag" "$file" --title "SMS vs Push - ${{ inputs.brand }}" --notes "Rendered by CI"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
