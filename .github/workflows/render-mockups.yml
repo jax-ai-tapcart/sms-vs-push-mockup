@@ -31,6 +31,7 @@ jobs:
           python3 .github/scripts/patch.py
           python3 .github/scripts/patch2.py
           python3 .github/scripts/patch3.py
+          python3 .github/scripts/patch4.py
       - name: Render
         run: cd .github/scripts && node render-final.js ${{ inputs.brand }}
       - name: Copy output
@@ -44,7 +45,7 @@ jobs:
       - name: Create release
         run: |
           file=$(ls mockup-output/*.png | head -1)
-          tag="${{ inputs.brand }}-v10-${{ github.run_number }}"
+          tag="${{ inputs.brand }}-v21-${{ github.run_number }}"
           gh release create "$tag" "$file" --title "SMS vs Push" --notes "CI render"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
