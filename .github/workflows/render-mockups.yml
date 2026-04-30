@@ -25,12 +25,16 @@ jobs:
           npx playwright install --with-deps chromium
       - name: Patch scripts
         run: |
+          sed -i 's/background: #101010; border-radius: 52px;/background: #000; border-radius: 52px;/g' .github/scripts/render-sms.js
+          sed -i 's/background: #101010; border-radius: 52px;/background: #000; border-radius: 52px;/g' .github/scripts/render-push.js
           sed -i 's/alotofastras 60%,//' .github/scripts/render-push.js
           sed -i 's/height: 160px; object-fit: cover;/height: 192px; object-fit: cover;/' .github/scripts/render-push.js
           sed -i 's/margin: 40px;//' .github/scripts/render-push.js
-      - name: Apply structural fixes
-        working-directory: .github/scripts
-        run: python3 patch.py
+          sed -i 's/color: #007AFF; font-size: 13px; font-family: Inter; }/color: #FF3B30; font-size: 13px; font-family: Inter; }/' .github/scripts/render-sms.js
+          sed -i 's/.phone-wrap/.phone/g' .github/scripts/render-push.js
+          sed -i 's/height: 480px; overflow: hidden; border-radius: 52px 52px 0 0; flex-shrink: 0;/flex-shrink: 0;/' .github/scripts/compose.js
+          sed -i 's/align-items: flex-start; gap: 40px;/align-items: center; gap: 60px;/' .github/scripts/compose.js
+          sed -i 's/margin-top: 240px;//' .github/scripts/compose.js
       - name: Render SMS panel
         run: cd .github/scripts && node render-sms.js ${{ inputs.brand }}
       - name: Render Push panel
