@@ -8,6 +8,9 @@ on:
         required: true
         default: lola
 
+permissions:
+  contents: write
+
 jobs:
   render:
     runs-on: ubuntu-latest
@@ -43,6 +46,11 @@ jobs:
         run: cd .github/scripts && node compose.js ${{ inputs.brand }}
       - name: Copy output
         run: mv .github/scripts/mockup-output ./mockup-output
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: mockup-${{ inputs.brand }}
+          path: mockup-output/*
       - name: Create release
         uses: ncipollo/release-action@v1
         with:
